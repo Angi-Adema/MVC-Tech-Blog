@@ -3,7 +3,7 @@ const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 //Create a new Sequelize medel for comments.
 class Comments extends Model {}
-
+//Create table.
 Comments.init({
     id: {
         type: DataTypes.INTEGER,
@@ -43,5 +43,5 @@ Comments.init({
         modelName: 'comments',
     }
 );
-
+//Export the file.
 module.exports = Comments;
