@@ -19,8 +19,8 @@ router.get('/:id', async (req, res) => {
         const singlePostData = await Posts.findByPk(req.params.id, {
             include: [{ model: Comments, through: Users }],
             
-            const post = singlePostData.get({ plain: true});
         });
+        const post = singlePostData.get({ plain: true});
 
         if (!singlePostData) {
             res.status(404).json({ message: 'No post found with that id!' });
