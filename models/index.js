@@ -5,7 +5,7 @@ const Users = require('./Users');
 
 //Define table or data relationships.
 Comments.belongsTo(Users, {
-    foreignKey: 'users_id'
+    foreignKey: 'users_id'    //NEED TO HAVE onDelete: 'CASCADE'???
 });
 
 Comments.belongsTo(Posts, {
