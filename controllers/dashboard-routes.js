@@ -2,7 +2,7 @@ const router = require("express").Router();
 const { Posts } = require("../models");
 const withAuth = require("../utils/auth");
 
-//GET all posts for the individual. (root path = /dashboard)
+//GET all posts for the individual. 
 router.get("/", withAuth, async (req, res) => {
     try {
         const postData = await Posts.findAll({
@@ -22,14 +22,14 @@ router.get("/", withAuth, async (req, res) => {
     }
 });
 
-//Create the new post and render the form. (root path = /dashboard/add)
+//Create the new post and render the form.
 router.get("/create", withAuth, (req, res) => {
     res.render("create-post", {
         layout: "dashboard",
     });
 });
 
-//Update the user post using id and render the form. (root path = dashboard/update/:id)
+//Update the user post using id and render the form. 
 router.get("/update/:id", withAuth, async (req, res) => {
     try {
         const postData = await Posts.findByPk(req.params.id);

@@ -5,29 +5,57 @@ const { Comments, Posts, Users } = require('../models');
 router.get('/', async (req, res) => {
     try {
         const dbPostsData = await Posts.findAll({
-            include: [{ model: Comments, through: Users }],
+            include: [{ model: Comments, through: Users }], //Users???
         });
-        res.status(200).json(dbPostsData);
+
+        const posts = postData.map((post) => post.get({ plain: true }));
+
+        res.render('all-posts', { posts });
+
     } catch (err) {
         res.status(500).json(err);
     }
 });
 
 //GET a single post.
-router.get('/:id', async (req, res) => {
+router.get('/posts/:id', async (req, res) => {
     try {
         const singlePostData = await Posts.findByPk(req.params.id, {
             include: [{ model: Comments, through: Users }],
             
         });
-        const post = singlePostData.get({ plain: true});
+        if (singlePostData) {
+            const post = singlePostData.get({ plain: true});
 
-        if (!singlePostData) {
-            res.status(404).json({ message: 'No post found with that id!' });
-            return;
+            res.render('single-post', { post });
+        } else {
+            if (!singlePostData) {
+                res.status(404).json({ message: 'No post found with that id!' });
+                return;
+            }
         }
-        res.status(200).json(singlePostData);
     } catch (err) {
         res.status(500).json(err);
     }
 });
+
+//Login route.
+router.get('/login', (req, res) => {
+    if (req.session.loggedIn) {
+        res.redirect('/');
+        return;
+    }
+    res.render('login');
+});
+
+//Sign-up route.
+router.get('/signup', (req, res) => {
+    if (req.session.loggedIn) {
+        res.redirect('/');
+        return;
+    }
+    res.render('sign-up');
+});
+
+//Export the routes.
+module.exports = router;
