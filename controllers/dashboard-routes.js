@@ -1,12 +1,11 @@
 const router = require("express").Router();
-const { Posts } = require("../models/");
+const { Posts } = require("../models");
 const withAuth = require("../utils/auth");
 
-//for individual user GET all posts
-//realtive path = /dashboard
+//GET all posts for the individual. (root path = /dashboard)
 router.get("/", withAuth, async (req, res) => {
     try {
-        const postData = await Post.findAll({
+        const postData = await Posts.findAll({
             where: {
                 userId: req.session.userId,
             },
@@ -14,7 +13,7 @@ router.get("/", withAuth, async (req, res) => {
 
         const posts = postData.map((post) => post.get({ plain: true }));
 
-        res.render("all-posts-dashboard", {
+        res.render("dashboard-posts", {
             layout: "dashboard",
             posts,
         });
@@ -23,19 +22,17 @@ router.get("/", withAuth, async (req, res) => {
     }
 });
 
-//render form to create new post
-//realtive path = /dashboard/add
-router.get("/add", withAuth, (req, res) => {
-    res.render("add-post", {
+//Create the new post and render the form. (root path = /dashboard/add)
+router.get("/create", withAuth, (req, res) => {
+    res.render("create-post", {
         layout: "dashboard",
     });
 });
 
-//render form to edit users post by id
-//realtive path = dashboard/update/:id
+//Update the user post using id and render the form. (root path = dashboard/update/:id)
 router.get("/update/:id", withAuth, async (req, res) => {
     try {
-        const postData = await Post.findByPk(req.params.id);
+        const postData = await Posts.findByPk(req.params.id);
 
         if (postData) {
             const post = postData.get({ plain: true });
