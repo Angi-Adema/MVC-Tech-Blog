@@ -8,7 +8,7 @@ router.get('/', async (req, res) => {
             include: [{ model: Comments, through: Users }], //Users???
         });
 
-        const posts = postData.map((post) => post.get({ plain: true }));
+        const posts = dbPostsData.map((post) => post.get({ plain: true }));
 
         res.render('all-posts', { posts });
 
