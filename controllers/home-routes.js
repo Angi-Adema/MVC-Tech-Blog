@@ -8,7 +8,7 @@ router.get('/', async (req, res) => {
             include: [User, {
                 model: Comment, 
                 include: [User]
-            }], //Users???
+            }], 
         });
 
         const posts = dbPostsData.map((post) => post.get({ plain: true }));
@@ -23,8 +23,11 @@ router.get('/', async (req, res) => {
 //GET a single post.
 router.get('/posts/:id', async (req, res) => {
     try {
-        const singlePostData = await Posts.findByPk(req.params.id, {
-            include: [{ model: Comments, through: Users }],
+        const singlePostData = await Post.findByPk(req.params.id, {
+            include: [User, {
+                model: Comment,
+                include: [User]
+            }],
             
         });
         if (singlePostData) {
