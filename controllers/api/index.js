@@ -8,9 +8,9 @@ const usersRoutes = require('./users-routes');
 
 
 //Use created routes.
-router.use('/comments', commentsRoutes);
-router.use('/posts', postsRoutes);
-router.use('/users', usersRoutes);
+router.use('/comment', commentsRoutes);
+router.use('/post', postsRoutes);
+router.use('/user', usersRoutes);
 
 //Export the router.
 module.exports = router;
