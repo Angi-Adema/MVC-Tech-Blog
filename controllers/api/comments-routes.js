@@ -1,11 +1,11 @@
 const router = require('express').Router();
-const { Comments } = require('../../models');
+const { Comment } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 //Require authorization from user to post a new comment.
 router.post('/', withAuth, async (req, res) => {
     try {
-        const newComment = await Comments.create(
+        const newComment = await Comment.create(
             req.body,
             {
                 where: req.session.userId,
