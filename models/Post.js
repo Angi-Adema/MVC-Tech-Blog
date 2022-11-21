@@ -2,15 +2,15 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 //Create a new Sequelize medel for comments.
-class Posts extends Model {}
+class Post extends Model {}
 //Create table.
-Posts.init({
-    id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true
-    },
+Post.init({
+//     id: {
+//         type: DataTypes.INTEGER,
+//         allowNull: false,
+//         autoIncrement: true,
+//         primaryKey: true
+//     },
     title: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -25,22 +25,22 @@ Posts.init({
             len: [1]
         }
     },
-    users_id: {
-        type: DataTypes.INTEGER,
-        references: {
-            model: 'users',
-            key: 'id'
-        }
-    }
+    // users_id: {
+    //     type: DataTypes.INTEGER,
+    //     references: {
+    //         model: 'users',
+    //         key: 'id'
+    //     }
+    // }
 },
     {
         sequelize,
-        timestamps: false,
+        // timestamps: false,
         freezeTableName: true,
         underscored: true,
-        modelName: 'posts',
+        modelName: 'post',
     }
 );
 //Export the file.
-module.exports = Posts;
+module.exports = Post;
 

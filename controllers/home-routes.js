@@ -1,16 +1,19 @@
 const router = require('express').Router();
-const { Comments, Posts, Users } = require('../models');
+const { Comment, Post, User } = require('../models');
 
 //GET all posts for the homepage including associated Users data.
 router.get('/', async (req, res) => {
     try {
-        const dbPostsData = await Posts.findAll({
-            include: [{ model: Comments, through: Users }], //Users???
+        const dbPostsData = await Post.findAll({
+            include: [User, {
+                model: Comment, 
+                include: [User]
+            }], //Users???
         });
 
         const posts = dbPostsData.map((post) => post.get({ plain: true }));
 
-        res.render('all-posts', { posts });
+        res.render('get-posts', { posts });
 
     } catch (err) {
         res.status(500).json(err);
@@ -54,7 +57,7 @@ router.get('/signup', (req, res) => {
         res.redirect('/');
         return;
     }
-    res.render('sign-up');
+    res.render('signup');
 });
 
 //Export the routes.

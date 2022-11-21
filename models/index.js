@@ -1,31 +1,27 @@
 //Set up require for all model files.
-const Comments = require('./Comments');
-const Posts = require('./Posts');
-const Users = require('./Users');
+const Comment = require('./Comment');
+const Post = require('./Post');
+const User = require('./User');
 
 //Define table or data relationships.
-Comments.belongsTo(Users, {
-    foreignKey: 'users_id'    //NEED TO HAVE onDelete: 'CASCADE'???
+Comment.belongsTo(User, {
+    foreignKey: 'user_id',
+    //NEED TO HAVE onDelete: 'CASCADE'???
+    onDelete: 'CASCADE'
 });
 
-Comments.belongsTo(Posts, {
-    foreignKey: 'posts_id'
+Post.belongsTo(User, {
+    foreignKey: 'user_id',
+    onDelete: 'CASCADE'
 });
 
-Posts.belongsTo(Users, {
-    foreignKey: 'users_id'
+
+Post.hasMany(Comment, {
+    foreignKey: 'post_id',
+    onDelete: 'CASCADE'
 });
 
-Posts.hasMany(Comments, {
-    foreignKey: 'posts_id'
-});
 
-Users.hasMany(Comments, {
-    foreignKey: 'users_id'
-});
 
-Users.hasMany(Posts, {
-    foreignKey: 'users_id'
-});
 //Export the file.
-module.exports = { Comments, Posts, Users };
+module.exports = { Comment, Post, User };

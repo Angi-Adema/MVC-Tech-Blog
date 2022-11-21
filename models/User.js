@@ -3,9 +3,9 @@ const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 const bcrypt = require('bcrypt');
 //Create a new Sequelize medel for comments.
-class Users extends Model { }
+class User extends Model { }
 //Create table.
-Users.init({
+User.init({
     id: {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -44,7 +44,7 @@ Users.init({
         timestamps: false,
         freezeTableName: true,
         underscored: true,
-        modelName: 'users',
+        modelName: 'user',
     });
     //Export the file.
-    module.exports = Users;
+    module.exports = User;
