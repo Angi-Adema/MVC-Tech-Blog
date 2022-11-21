@@ -13,7 +13,7 @@ router.get("/", withAuth, async (req, res) => {
 
         const posts = postData.map((post) => post.get({ plain: true }));
 
-        res.render("dashboard-posts", {
+        res.render("dashboard", {
             layout: "dashboard",
             posts,
         });
@@ -24,7 +24,7 @@ router.get("/", withAuth, async (req, res) => {
 
 //Create the new post and render the form.
 router.get("/create", withAuth, (req, res) => {
-    res.render("create-post", {
+    res.render("new-post", {
         layout: "dashboard",
     });
 });
@@ -37,7 +37,7 @@ router.get("/update/:id", withAuth, async (req, res) => {
         if (postData) {
             const post = postData.get({ plain: true });
 
-            res.render("update-post", {
+            res.render("edit-posts", {
                 layout: "dashboard",
                 post,
             });
