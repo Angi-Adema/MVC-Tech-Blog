@@ -2,7 +2,7 @@
 const router = require('express').Router();
 
 //Require Comments, Posts and User routes.
-const commentsRoutes = require('./comments-routes');
+const commentsRoutes = require('./comment-routes');
 const postsRoutes = require('./posts-routes');
 const usersRoutes = require('./users-routes');
 
