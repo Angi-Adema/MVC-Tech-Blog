@@ -5,17 +5,17 @@ const withAuth = require("../utils/auth");
 //GET all posts for the individual. 
 router.get("/", withAuth, async (req, res) => {
     try {
-        const postData = await Post.findAll({
-            where: {
-                userId: req.session.userId,
-            },
-        });
+        // const postData = await Post.findAll({
+        //     where: {
+        //         userId: req.session.userId,
+        //     },
+        // });
 
-        const posts = postData.map((post) => post.get({ plain: true }));
+        // const posts = postData.map((post) => post.get({ plain: true }));
 
         res.render("dashboard", {
-            layout: "dashboard",
-            posts,
+            // posts,
+            loggedIn: req.session.loggedIn
         });
     } catch (err) {
         res.redirect("login");
@@ -25,7 +25,7 @@ router.get("/", withAuth, async (req, res) => {
 //Create the new post and render the form.
 router.get("/create", withAuth, (req, res) => {
     res.render("new-post", {
-        layout: "dashboard",
+        loggedIn: req.session.loggedIn
     });
 });
 

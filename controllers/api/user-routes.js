@@ -4,10 +4,8 @@ const { User } = require('../../models');
 //Create user route and post.
 router.post('/', async (req, res) => {
     try {
-        const addedUser = await User.create({ //IS THE USERNAME REDUNDANT?
-            username: req.body.username,
-            password: req.body.password,
-        });
+        console.log(req.body);
+        const addedUser = await User.create(req.body);
 
         req.session.save(() => {
             req.session.userId = addedUser.id;
@@ -25,6 +23,7 @@ router.post('/', async (req, res) => {
 //Create login route for the existing user.
 router.post('/login', async (req, res) => {
     try {
+        console.log('this is the console log for username: ',req.body.username);
         const userLogin = await User.findOne({
             where: {
                 username: req.body.username,
@@ -36,7 +35,7 @@ router.post('/login', async (req, res) => {
             return;
         }
 
-        const correctPassword = await userLogin.checkPassword(req.body.password);
+        const correctPassword =  userLogin.checkPassword(req.body.password);
 
         if (!correctPassword) {
             res.status(400).json({ message: 'No user found with those credentials!' });
