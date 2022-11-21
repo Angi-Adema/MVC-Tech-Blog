@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Posts } = require('../../models');
+const { Post } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 //Create the post.
@@ -7,7 +7,7 @@ router.post('/', withAuth, async (req, res) => {
     const body = req.body;
 
     try {
-        const addedPost = await Posts.create({
+        const addedPost = await Post.create({
             where: {
                 userId: req.session.userId,
             },
@@ -21,7 +21,7 @@ router.post('/', withAuth, async (req, res) => {
 //Edit the post.
 router.put('/:id', withAuth, async (req, res) => {
     try {
-        const updatePost = await Posts.update(
+        const updatePost = await Post.update(
             req.body,
             {
                 where: {
@@ -43,7 +43,7 @@ router.put('/:id', withAuth, async (req, res) => {
 router.delete('/:id', withAuth, async (req, res) => {
     // delete a category by its `id` value
     try {
-        const deletePost = await Posts.destroy({
+        const deletePost = await Post.destroy({
             where: {
                 id: req.params.id
             }
