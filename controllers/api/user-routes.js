@@ -1,10 +1,10 @@
 const router = require('express').Router();
-const { Users } = require('../../models');
+const { User } = require('../../models');
 
 //Create user route and post.
 router.post('/', async (req, res) => {
     try {
-        const addedUser = await Users.create({ //IS THE USERNAME REDUNDANT?
+        const addedUser = await User.create({ //IS THE USERNAME REDUNDANT?
             username: req.body.username,
             password: req.body.password,
         });
@@ -25,7 +25,7 @@ router.post('/', async (req, res) => {
 //Create login route for the existing user.
 router.post('/login', async (req, res) => {
     try {
-        const userLogin = await Users.findOne({
+        const userLogin = await User.findOne({
             where: {
                 username: req.body.username,
             },
