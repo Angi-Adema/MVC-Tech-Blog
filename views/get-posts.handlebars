@@ -1,3 +1,5 @@
-{{#each posts}}
-  <h2>{{title}}</h2>
-{{/each}}
+{{#if post.comments}}
+  {{#each posts}}
+    <h2>{{title}}</h2>
+  {{/each}}
+{{/if}}

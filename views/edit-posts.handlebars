@@ -1,0 +1,21 @@
+<div class="row justify-space-between-md">
+    <div class="login-card">
+        <h2 class="page-title">Edit Post</h2>
+    </div>
+        <form class="form edit-post">
+            <input type="hidden" name="post-id" value="{{post.id}}" /> 
+        
+            <label class="form-label" for="post-title">Title</label>
+            <input class="form-input" type="text" name="post-title" value="{{post.title}}" />
+                
+            <label class="form-label" for="post-content">Content</label>
+            <textarea class="form-input" name="post-body>{{post.body}}</textarea>
+
+            <button type="submit" class="btn">Update</button>
+
+            <button type="button" id="delete" class="btn">Delete</button>
+        </form>
+</div>
+
+
+<script src="/js/edit.js"></script>
