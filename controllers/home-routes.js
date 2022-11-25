@@ -21,7 +21,7 @@ router.get('/', async (req, res) => {
 });
 
 //GET a single post.
-router.get('/posts/:id', async (req, res) => {
+router.get('/post/:id', async (req, res) => {
     try {
         const singlePostData = await Post.findByPk(req.params.id, {
             include: [User, {
@@ -33,7 +33,9 @@ router.get('/posts/:id', async (req, res) => {
         if (singlePostData) {
             const post = singlePostData.get({ plain: true});
 
-            res.render('single-post', { post });
+            console.log(post);
+            res.render('single-post', { post, loggedIn: req.session.loggedIn });
+
         } else {
             if (!singlePostData) {
                 res.status(404).json({ message: 'No post found with that id!' });

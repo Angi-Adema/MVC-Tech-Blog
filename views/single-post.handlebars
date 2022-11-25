@@ -1,3 +1,31 @@
-{{#each posts}}
-  <h2>{{title}}</h2>
-{{/each}}
+<h2>{{post.title}}
+  published:
+  {{format_date post.createdAt}}
+  by
+  {{post.user.username}}</h2>
+<p>{{post.content}}</p>
+
+{{#if loggedIn}}
+  <div class="row justify-space-between-md">
+    <div class="login-card">
+      <h2 class="page-title">Add Comment</h2>
+    </div>
+    <form class="form comment-form">
+      <input type="hidden" id="post-id" value="{{post.id}}" />
+
+      <label class="form-label" for="comment-body">Content</label>
+      <textarea class="form-input" id="comment-body"></textarea>
+
+      <button type="submit" class="btn">Add comment</button>
+
+    </form>
+  </div>
+
+{{/if}}
+
+{{#if post.comments}}
+  {{#each post.comments}}
+    <p>{{comments.comment_body}}</p>
+    <p>username: {{comments.user.username}}</p>
+  {{/each}}
+{{/if}}

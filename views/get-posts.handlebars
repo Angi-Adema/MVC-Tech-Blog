@@ -1,5 +1,6 @@
-{{#if post.comments}}
-  {{#each posts}}
-    <h2>{{title}}</h2>
-  {{/each}}
-{{/if}}
+{{#each posts}}
+  <div>
+    <a href="/post/{{id}}"><h2>{{title}}</h2></a>
+  </div>
+{{/each}}
+

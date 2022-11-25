@@ -41,8 +41,8 @@ router.get("/update/:id", withAuth, async (req, res) => {
             const post = postData.get({ plain: true });
 
             res.render("edit-posts", {
-                layout: "dashboard",
                 post,
+                loggedIn: req.session.loggedIn
             });
         } else {
             res.status(404).end();
