@@ -25,7 +25,9 @@
 
 {{#if post.comments}}
   {{#each post.comments}}
-    <p>{{comments.comment_body}}</p>
-    <p>username: {{comments.user.username}}</p>
+    <p>{{comment_body}}</p>
+    <p>username: {{user.username}}</p>
   {{/each}}
 {{/if}}
+
+<script src="/js/comments.js"></script>
