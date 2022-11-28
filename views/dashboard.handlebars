@@ -1,6 +1,7 @@
 {{#each posts}}
-   <div>
+  <div>
     <a href="/dashboard/update/{{id}}"><h2>{{title}}</h2></a>
+    <p>Published: {{format_date createdAt}}</p>
   </div>
 {{/each}}
 

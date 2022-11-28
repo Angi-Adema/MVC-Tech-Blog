@@ -1,7 +1,7 @@
 <h2>{{post.title}}
-  published:
+  Published:
   {{format_date post.createdAt}}
-  by
+  By:
   {{post.user.username}}</h2>
 <p>{{post.content}}</p>
 
@@ -10,13 +10,16 @@
     <div class="login-card">
       <h2 class="page-title">Add Comment</h2>
     </div>
-    <form class="form comment-form">
+    <form class="form comment-form mb-4">
       <input type="hidden" id="post-id" value="{{post.id}}" />
 
-      <label class="form-label" for="comment-body">Content</label>
-      <textarea class="form-input" id="comment-body"></textarea>
-
-      <button type="submit" class="btn">Add comment</button>
+      <label class="form-label" for="comment-body"></label>
+      <textarea
+        class="form-control form-control-lg"
+        id="comment-body"
+      ></textarea>
+      <br />
+      <button type="submit" class="btn btn-primary">Add comment</button>
 
     </form>
   </div>
@@ -25,8 +28,9 @@
 
 {{#if post.comments}}
   {{#each post.comments}}
+    <p>Published: {{format_date createdAt}}</p>
     <p>{{comment_body}}</p>
-    <p>username: {{user.username}}</p>
+    <p>Username: {{user.username}}</p>
   {{/each}}
 {{/if}}
 

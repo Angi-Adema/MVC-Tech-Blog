@@ -1,5 +1,6 @@
 {{#each posts}}
   <div>
     <a href="/post/{{id}}"><h2>{{title}}</h2></a>
+    <p>Published: {{format_date createdAt}}</p>
   </div>
 {{/each}}
